@@ -46,7 +46,8 @@ int deletefront()
 		return -1;
 	}
 	int x = a[front];
-	front++;
+	a[front] = 0;
+	front--;
 	return x;
 }
 int deleterear()
@@ -57,7 +58,8 @@ int deleterear()
 		return -1;
 	}
 	int x = a[rear];
-	rear--;
+	a[rear] = 0;
+	rear++;
 	return x;
 }
 void show()
@@ -102,10 +104,12 @@ int main()
 				pushrear(x);
 				break;
 			case 3:
-				deletefront();
+				x = deletefront();
+				printf("\n%d is the deleted element");
 				break;
 			case 4:
-				deleterear();
+				x = deletefront();
+				printf("\n%d is the deleted element");
 				break;
 			case 5:
 				show();
