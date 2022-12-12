@@ -12,7 +12,7 @@ int main() {
 	{
 		if(prime[i] == 1)
 		{	
-			int j = i+i; 
+			int j = i*i; 
 			while(j < n)
 			{
 				prime[j] = 0;
