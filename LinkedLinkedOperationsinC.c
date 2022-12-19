@@ -42,6 +42,22 @@ void insertatbeg(int d)
         head = temp;
     }
 }
+void insertatloc(int d, int loc)
+{
+    struct node* ptr = head;
+    struct node* temp = (struct node*)malloc(sizeof(struct node*));
+    temp->data = d;
+    temp->next = NULL;
+    for(int i = 0; i < loc-1; i++)
+    {
+        if(i == 0)
+            ptr = head;
+        else
+            ptr = ptr->next;
+    }
+    temp->next = ptr->next;
+    ptr->next = temp;
+}
 void print()
 {
     struct node* ptr = head;
@@ -75,7 +91,8 @@ int main()
         int choice;
         printf("\n1. Insert at end");
         printf("\n2. Insert at beginning");
-        printf("\n3. Reverse List");
+        printf("\n3. Insert at Location:");
+        printf("\n4. Reverse List");
         printf("\nEnter choice: ");
         scanf("%d", &choice);
         if(choice == 1)
@@ -95,6 +112,14 @@ int main()
             print();
         }
         else if(choice == 3)
+        {
+            int data, loc;
+            printf("\nEnter data to add to linked list at the beginning and location:");
+            scanf("%d %d", &data, &loc);
+            insertatloc(data, loc);
+            print();
+        }
+        else if(choice == 4)
         {
             reverse();
             print();
