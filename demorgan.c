@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-int lhs[50], rhs[50], setAcomp[50], setBcomp[50], temp[100];
+int lhs[50], rhs[50], rhslen, setAcomp[50], setAcompLen, setBcompLen, setBcomp[50], temp[100], unionlen;
 void unionfun(int* a, int* b, int n, int m)
 {
     for(int i = 0; i < n; i++)
@@ -20,11 +20,13 @@ void unionfun(int* a, int* b, int n, int m)
             temp[top] = b[i];
         }
     }
-    for(int i = 0; i <= top; i++)
-        printf("%d ", temp[i]);
+    unionlen = top;
+    // for(int i = 0; i <= top; i++)
+    //     printf("%d ", temp[i]);
+    // printf("\n");
 }
 
-void complement(int* uni, int *a, int u, int n, int* set)
+void complement(int* uni, int *a, int u, int n, int* set, int setlen)
 {
     int top = 0;
     for(int i = 0; i < u; i++)
@@ -45,10 +47,28 @@ void complement(int* uni, int *a, int u, int n, int* set)
             top++;
         }
     }
-    for(int i = 0; i < top; i++)
-        printf("%d ", set[i]);
+    setlen = top;
+    // for(int i = 0; i < top; i++)
+    //     printf("%d ", set[i]);
+    // printf("\n");
 }
 
+void intersection(int* a, int* b, int n, int m)
+{
+    int top = 0;
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            if(a[i] == b[j])
+            {
+                rhs[top] = a[i];
+                top++;
+            }
+        }
+    }
+    rhslen = top;
+}
 void main()
 {
     int u, n, m;
@@ -66,6 +86,16 @@ void main()
     for(int i = 0; i<m; i++)
         scanf("%d", &setB[i]);  
     unionfun(setA, setB, n, m);
-    complement(universal, setA, u, n, setAcomp);
+    complement(universal, setA, u, n, setAcomp, setAcompLen);
+    complement(universal, setB, u, m, setBcomp, setBcompLen);
+    complement(universal, temp, u, unionlen, lhs, unionlen);
+    intersection(setAcomp, setBcomp, setAcompLen, setBcompLen);
+    printf("LHS = ");
+    for(int i = 0; i < unionlen; i++)
+        printf("%d ", lhs[i]);
+    printf("\nRHS = ");
+    for(int i = 0; i < rhslen; i++)
+        printf("%d ", rhs[i]);
+    printf("\n");
     //intersection
 }
