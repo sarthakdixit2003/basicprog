@@ -27,6 +27,21 @@ void insert(int d)
         ptr->next->next = NULL;
     }
 }
+void insertatbeg(int d)
+{
+    struct node* temp = (struct node*)malloc(sizeof(struct node*));
+    temp->data = d;
+    temp->next = NULL;
+    if(head == NULL)
+    {
+        head = temp;
+    }
+    else
+    {
+        temp->next = head;
+        head = temp;
+    }
+}
 void print()
 {
     struct node* ptr = head;
@@ -58,19 +73,28 @@ int main()
     while(1)
     {
         int choice;
-        printf("\n1. Insert");
-        printf("\n2. Reverse List");
+        printf("\n1. Insert at end");
+        printf("\n2. Insert at beginning");
+        printf("\n3. Reverse List");
         printf("\nEnter choice: ");
         scanf("%d", &choice);
         if(choice == 1)
         {
             int data;
-            printf("\nEnter data to add to linked list:");
+            printf("\nEnter data to add to linked list at the end:");
             scanf("%d", &data);
             insert(data);
             print();
         }
         else if(choice == 2)
+        {
+            int data;
+            printf("\nEnter data to add to linked list at the beginning:");
+            scanf("%d", &data);
+            insertatbeg(data);
+            print();
+        }
+        else if(choice == 3)
         {
             reverse();
             print();
