@@ -83,6 +83,24 @@ void reverse()
     head = temp;
     temp->next = prev;
 }
+void removeDuplicate(struct node **head)
+{
+    struct node *temp,*ptr;
+    ptr=*head;
+    while(ptr->next!=NULL)
+    {
+        temp=ptr;
+        while(temp->next!=NULL)
+        {
+            if(temp->next->data==ptr->data){
+            temp->next=temp->next->next;
+            }
+            else
+            temp=temp->next;
+        }
+        ptr=ptr->next;
+    }
+}
 int main()
 {
     head = NULL;
@@ -93,6 +111,7 @@ int main()
         printf("\n2. Insert at beginning");
         printf("\n3. Insert at Location:");
         printf("\n4. Reverse List");
+        printf("\n5. Remove Duplicates");
         printf("\nEnter choice: ");
         scanf("%d", &choice);
         if(choice == 1)
@@ -122,6 +141,11 @@ int main()
         else if(choice == 4)
         {
             reverse();
+            print();
+        }
+        else if(choice == 5)
+        {
+            removeDuplicate(&head);
             print();
         }
         else
